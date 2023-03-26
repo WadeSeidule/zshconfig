@@ -1,5 +1,5 @@
 # Path to zsh config dir
-export ZSH_CONFIG_DIR=~/.zsh_config
+export ZSH_CONFIG_DIR=~/.zshconfig
 
 bindkey -v
 
