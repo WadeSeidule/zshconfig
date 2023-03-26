@@ -1,0 +1,2 @@
+# zshconfig
+zsh shell scripts
