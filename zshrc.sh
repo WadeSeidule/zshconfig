@@ -79,7 +79,7 @@ ZSH_THEME="gnzh"
 # Add wisely, as too many plugins slow down shell startup.
 
 # User configuration
-find "$ZSH_CONFIG_DIR" -type f -name "*.sh" | while read -r file; do
+find "$ZSH_CONFIG_DIR" -type f -name "zsh*.sh" | while read -r file; do
   # Skips this file or else endless loop
   if [[ "$(basename "$file")" == $(basename $0) ]]; then
         continue
