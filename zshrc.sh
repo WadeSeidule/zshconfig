@@ -1,3 +1,5 @@
+# Amazon Q pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 # Path to zsh config dir
 export ZSH_CONFIG_DIR=~/.zshconfig
 
@@ -77,12 +79,13 @@ ZSH_THEME="gnzh"
 # Add wisely, as too many plugins slow down shell startup.
 
 # User configuration
-export ZSH_CONFIG_DIR=~/.zsh_config
-source $ZSH_CONFIG_DIR/zshexports.sh
-source $ZSH_CONFIG_DIR/zshaliases.sh
-source $ZSH_CONFIG_DIR/zshfunctions.sh
-source $ZSH_CONFIG_DIR/zshplugins.sh
-
+find "$ZSH_CONFIG_DIR" -type f -name "*.sh" | while read -r file; do
+  # Skips this file or else endless loop
+  if [[ "$(basename "$file")" == $(basename $0) ]]; then
+        continue
+  fi
+  source $file
+done
 source $ZSH/oh-my-zsh.sh
 
 # pyenv config
@@ -90,4 +93,6 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+[[ -f "$HOME/fig-export/dotfiles/dotfile.zsh" ]] && builtin source "$HOME/fig-export/dotfiles/dotfile.zsh"
+# Amazon Q post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"

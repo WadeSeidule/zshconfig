@@ -17,6 +17,5 @@ plugins=(
     poetry
     python
     redis-cli
-    ripgrep
     yarn
 )
