@@ -15,8 +15,8 @@ export SNOWQA_USAGE_MONITORING=0
 export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 
 #Kafka
-export C_INCLUDE_PATH=/opt/homebrew/Cellar/librdkafka/2.2.0/include/
-export LIBRARY_PATH=/opt/homebrew/Cellar/librdkafka/2.2.0/lib
+export C_INCLUDE_PATH=/opt/homebrew/Cellar/librdkafka/2.5.0/include/
+export LIBRARY_PATH=/opt/homebrew/Cellar/librdkafka/2.5.0/lib
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
