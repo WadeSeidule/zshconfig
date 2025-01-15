@@ -4,10 +4,14 @@
 1. Install Oh My Zsh:
 ```sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"```
 
-2. At top of `zshrc.sh` update `ZSH_CONFIG_DIR` with path to project directory
+2. Setup:
 
-3. Copy contents to zshrc:
-```cp zshrc.sh ~/.zshrc```
+    - `chmod +x scripts/*`
+    - `./scripts/setup.sh`
 
-4. Execute new zshrc:
-```source ~/.zshrc```
+3. Work Configs
+
+    To keep work specific configuration seperate from your global config:
+
+    - `./scripts/new_workconfig.sh {name}`
+
