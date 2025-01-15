@@ -3,6 +3,7 @@
 
 # Path to zsh config dir
 ZSH_CONFIG_DIR=$ZSH_CONFIG_DIR || "$HOME/.zshconfig"
+PATH=$ZSH_CONFIG_DIR/zc:$PATH
 
 # vim mode
 bindkey -v

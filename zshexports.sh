@@ -1,7 +1,7 @@
 # /bin/zsh
 
 # KUBE PS1
-RPS1='$(kubectx_prompt_info)'s
+# RPS1='$(kubectx_prompt_info)'s
 
 #PYTHON
 export PYTHON_VENV_DIRECTORY="~/venv"
