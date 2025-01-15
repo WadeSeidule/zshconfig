@@ -8,6 +8,10 @@ export PYTHON_VENV_DIRECTORY="~/venv"
 export DEFAULT_PYENV=1
 export DEFAULT_VENV=0
 export PYTHONPATH=.
+# pyenv config
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
 
 export SNOWQA_USAGE_MONITORING=0
 

@@ -4,7 +4,7 @@
 # Path to zsh config dir
 ZSH_CONFIG_DIR=$ZSH_CONFIG_DIR || "$HOME/.zshconfig"
 
-# binds
+# vim mode
 bindkey -v
 
 # top level zsh files
@@ -17,18 +17,12 @@ find "$ZSH_CONFIG_DIR" -maxdepth 1 -type f -name "zsh*.sh" | while read -r file;
 done
 
 # work config zsh files
-find "$ZSH_CONFIG_DIR/workconfigs/$WORK_CONFIG" -type f -name "zsh*.sh" | while read -r file; do
-  # Skips this file or else endless loop
-  if [[ "$(basename "$file")" == $(basename $0) ]]; then
-        continue
-  fi
-  source $file
-done
-source $ZSH/oh-my-zsh.sh
-
-# pyenv config
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
+if [ -f "$ZSH_CONFIG_DIR/.active_work_configs" ]; then
+  while read -r workconfig; do
+    find "$ZSH_CONFIG_DIR/workconfigs/$workconfig" -maxdepth 1 -type f -name "zsh*.sh" | while read -r file; do
+      source $file
+    done
+  done < "$ZSH_CONFIG_DIR/.active_work_configs"
 fi
 
 [[ -f "$HOME/fig-export/dotfiles/dotfile.zsh" ]] && builtin source "$HOME/fig-export/dotfiles/dotfile.zsh"
