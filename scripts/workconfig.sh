@@ -59,12 +59,15 @@ if [ "$2" = "deactivate" ]; then
 fi
 
 ## list ##
-if [ "$2" = "list" ]; then
+if [ "$1" = "list" ]; then
+    echo "Active work configs:"
     if [ ! -f "$ZSH_CONFIG_DIR/.active_work_configs" ]; then
-        echo "No active work configs found"
-        exit 1
+        echo "None"
+    else
+        cat $ZSH_CONFIG_DIR/.active_work_configs
     fi
-    cat $ZSH_CONFIG_DIR/.active_work_configs
+    echo "All work configs:"
+    ls -1 $ZSH_CONFIG_DIR/workconfigs
     exit 0
 fi
 

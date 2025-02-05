@@ -18,5 +18,3 @@ alias ip="ipython"
 alias k=kubectl
 alias kc=kubectx
 alias helm3="helm"
-
-alias todo="vim ~/notes/todo.txt"

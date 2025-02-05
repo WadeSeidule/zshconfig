@@ -5,9 +5,6 @@
 ZSH_CONFIG_DIR=$ZSH_CONFIG_DIR || "$HOME/.zshconfig"
 PATH=$ZSH_CONFIG_DIR/zc:$PATH
 
-# vim mode
-bindkey -v
-
 # top level zsh files
 find "$ZSH_CONFIG_DIR" -maxdepth 1 -type f -name "zsh*.sh" | while read -r file; do
   # Skips this file or else endless loop
@@ -26,6 +23,5 @@ if [ -f "$ZSH_CONFIG_DIR/.active_work_configs" ]; then
   done < "$ZSH_CONFIG_DIR/.active_work_configs"
 fi
 
-[[ -f "$HOME/fig-export/dotfiles/dotfile.zsh" ]] && builtin source "$HOME/fig-export/dotfiles/dotfile.zsh"
 # Amazon Q post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"

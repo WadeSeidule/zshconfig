@@ -77,4 +77,27 @@ ZSH_THEME="gnzh"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
+## CUSTOM PLUG IN INSTALLATION INFO ##
+# zsh-vi-mode:
+#   git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
+
+# oh my zsh plugins
+plugins=(
+    git
+    aws
+    docker
+    golang
+    helm
+    kubectx
+    macos
+    pip
+    poetry
+    python
+    redis-cli
+    yarn
+    zsh-vi-mode
+    1password
+    celery
+)
+
 source $ZSH/oh-my-zsh.sh
