@@ -39,3 +39,6 @@ export PATH=/opt/homebrew/Cellar/ruby/3.3.1/bin/:$PATH
 
 # FZF
 export FZF_DEFAULT_OPTS="--history=$HOME/.fzf-history"
+
+# autojump
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
