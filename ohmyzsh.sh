@@ -8,13 +8,19 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
 fi
 
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+export OMZ="$HOME/.oh-my-zsh"
+export ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="gnzh"
+
+# defined in custom.zsh-theme and cp to $ZSH_CUSTOM/themes/custom.zsh-theme
+if [ ! -f "$ZSH_CUSTOM/themes/custom.zsh-theme" ]; then
+    cp custom.zsh-theme $ZSH_CUSTOM/themes/custom.zsh-theme
+fi
+ZSH_THEME="custom"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -79,7 +85,9 @@ ZSH_THEME="gnzh"
 
 ## CUSTOM PLUG IN INSTALLATION INFO ##
 # zsh-vi-mode:
-#   git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
+if [ ! -d "$ZSH_CUSTOM/plugins/zsh-vi-mode" ]; then
+    git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
+fi
 
 # oh my zsh plugins
 plugins=(
@@ -89,15 +97,17 @@ plugins=(
     golang
     helm
     kubectx
-    macos
+    kubectl
+    kube-ps1
     pip
     poetry
     python
     redis-cli
     yarn
-    zsh-vi-mode
     1password
     celery
+    # custom plugins
+    zsh-vi-mode
 )
 
-source $ZSH/oh-my-zsh.sh
+source $OMZ/oh-my-zsh.sh

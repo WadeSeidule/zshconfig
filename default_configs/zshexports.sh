@@ -1,10 +1,15 @@
 # /bin/zsh
 
 # KUBE PS1
-RPS1='$(kubectx_prompt_info)'s
+KUBE_PS1_SYMBOL_ENABLE=false
+KUBE_PS1_CTX_COLOR=90
+KUBE_PS1_BG_COLOR=0
+
+#AWS
+SHOW_AWS_PROMPT=false
 
 #PYTHON
-export PYTHON_VENV_DIRECTORY="~/dev/.venvs"
+export PYTHON_VENV_DIRECTORY="$HOME/dev/.venvs"
 mkdir -p $PYTHON_VENV_DIRECTORY
 
 # Exports used by workon function in zshfunctions.sh
@@ -19,8 +24,6 @@ export PYTHONPATH=.
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
-
-export SNOWQA_USAGE_MONITORING=0
 
 # Mysql
 export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
@@ -39,3 +42,9 @@ export PATH=/opt/homebrew/Cellar/ruby/3.3.1/bin/:$PATH
 
 # FZF
 export FZF_DEFAULT_OPTS="--history=$HOME/.fzf-history"
+
+# autojump
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+
+# Pipx
+export PATH="$PATH:/Users/wadeseidule/.local/bin"
