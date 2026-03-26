@@ -25,13 +25,13 @@
 2. **Create a Workspace**:
    Define a new workspace for a specific project:
    ```bash
-   zc workconfig <workname> create
+   zc workconfig create <workname>
    ```
 
 3. **Activate a Workspace**:
    Switch to the new workspace:
    ```bash
-   zc workconfig <workname> activate
+   zc workconfig activate <workname>
    ```
 
 4. **Manage Active Workspaces**:
@@ -100,40 +100,47 @@ The `zc setup` command initializes your Zsh environment with the `zshconfig` fra
 
 #### `zc workconfig`
 
-The `zc workconfig` command manages work-specific Zsh configurations, allowing you to create, activate, deactivate, and list configurations for different work environments. Configurations are stored in the `workconfigs` directory under the `ZSH_CONFIG_DIR`.
+The `zc workconfig` command manages work-specific Zsh configurations, allowing you to create, activate, deactivate, edit, and list configurations for different work environments. Configurations are stored in the `workconfigs` directory under the `ZSH_CONFIG_DIR`.
 
 ##### Features
 
 1. **Create a Work Config**: Initialize a new work configuration with default files for functions, aliases, exports, and secrets.
 2. **Activate a Work Config**: Enable a specific configuration and add it to the active list.
 3. **Deactivate a Work Config**: Remove a configuration from the active list.
-4. **List Active Configs**: Display currently active configurations.
+4. **Edit a Work Config**: Open a work config directory in your editor.
+5. **List Active Configs**: Display currently active configurations.
 
 ---
 
 ##### Create a New Work Config
 ```bash
-zc workconfig <workname> create
+zc workconfig create <workname>
 ```
 Creates a new directory for `<workname>` under `workconfigs` with default Zsh files.
 
 ##### Activate a Work Config
 ```bash
-zc workconfig <workname> activate
+zc workconfig activate <workname>
 ```
-Marks `<workname>` as active by adding it to the active configs list. This will cause all the zsh configuration files under that directory to be sourced after the global configurations.
+Marks `<workname>` as active by adding it to the active configs list. This will cause all the zsh configuration files under that directory to be sourced after the global configurations. Activating an already-active config is a no-op.
 
 ##### Deactivate a Work Config
 ```bash
-zc workconfig <workname> deactivate
+zc workconfig deactivate <workname>
 ```
-Removes `<workname>` from the active configs list. Will n longer be sourced.
+Removes `<workname>` from the active configs list. Will no longer be sourced.
+
+##### Edit a Work Config
+```bash
+zc workconfig edit <workname>
+```
+Opens the `<workname>` config directory in your editor (`$EDITOR`, defaults to `code`).
 
 ##### List Active Work Configs
 ```bash
 zc workconfig list
 ```
-Displays all currently active work configurations.
+Displays all currently active work configurations and all available configs.
 
 ##### Display Help
 ```bash

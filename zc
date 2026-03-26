@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-# Define the directory where the scripts are stored
 if [ -z "$ZSH_CONFIG_DIR" ]; then
     echo "Error: ZSH_CONFIG_DIR is not set."
     exit 1
@@ -8,12 +7,29 @@ fi
 
 SCRIPT_DIR="$ZSH_CONFIG_DIR/scripts"
 
-# Check if the argument is provided
-if [ -z "$1" ]; then
-    echo "Usage: $0 <script_name> [args]"
+if [ ! -d "$SCRIPT_DIR" ]; then
+    echo "Error: Scripts directory not found at $SCRIPT_DIR"
     exit 1
 fi
 
-# Check if the specified script exists
+# No arguments or help flag
+if [ -z "$1" ] || [ "$1" = "help" ] || [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+    echo "Usage: zc <command> [args]"
+    echo ""
+    echo "Available commands:"
+    for script in "$SCRIPT_DIR"/*.sh; do
+        name=$(basename "$script" .sh)
+        echo "  $name"
+    done
+    exit 0
+fi
+
 SCRIPT="$SCRIPT_DIR/$1.sh"
+
+if [ ! -f "$SCRIPT" ]; then
+    echo "Error: Unknown command '$1'"
+    echo "Run 'zc help' to see available commands."
+    exit 1
+fi
+
 "$SCRIPT" "${@:2}"

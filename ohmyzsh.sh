@@ -86,7 +86,7 @@ ZSH_THEME="custom"
 ## CUSTOM PLUG IN INSTALLATION INFO ##
 # zsh-vi-mode:
 if [ ! -d "$ZSH_CUSTOM/plugins/zsh-vi-mode" ]; then
-  git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
+  git clone https://github.com/jeffreytse/zsh-vi-mode "$ZSH_CUSTOM/plugins/zsh-vi-mode"
 fi
 
 # oh my zsh plugins
@@ -110,5 +110,5 @@ plugins=(
   zsh-vi-mode
 )
 
-source $OMZ/oh-my-zsh.sh
+source "$OMZ/oh-my-zsh.sh"
 

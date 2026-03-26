@@ -1,27 +1,35 @@
-# /bin/zsh
+#!/bin/zsh
 
-# back up old .zshrc file
-if [ -f "$HOME/.zshrc" ]; then
-    t=$(date +%s)
-    echo "Creating backup of old .zshrc file to .zshrc.bak.$t"
-    mv $HOME/.zshrc $HOME/.zshrc.bak.$t
+if [ -z "$ZSH_CONFIG_DIR" ]; then
+    # Infer from script location
+    ZSH_CONFIG_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 fi
 
-# create .zshrc file
-touch $HOME/.zshrc
+# Check if already configured
+if [ -f "$HOME/.zshrc" ] && grep -qF "source $ZSH_CONFIG_DIR/zshrc.sh" "$HOME/.zshrc"; then
+    echo "Zsh config is already set up (found source line in ~/.zshrc)."
+    echo "To force reinstall, remove ~/.zshrc and run again."
+    exit 0
+fi
 
-# add ZSH_CONFIG_DIR to the .zshrc file
-echo "export ZSH_CONFIG_DIR=$ZSH_CONFIG_DIR" >> $HOME/.zshrc
+# Back up old .zshrc file
+if [ -f "$HOME/.zshrc" ]; then
+    t=$(date +%s)
+    echo "Creating backup of old .zshrc file to ~/.zshrc.bak.$t"
+    mv "$HOME/.zshrc" "$HOME/.zshrc.bak.$t"
+fi
 
-# add PATH to the .zshrc file
-echo "export PATH=$ZSH_CONFIG_DIR:\$PATH" >> $HOME/.zshrc
+# Create .zshrc file
+cat > "$HOME/.zshrc" <<EOF
+export ZSH_CONFIG_DIR=$ZSH_CONFIG_DIR
+export PATH=\$ZSH_CONFIG_DIR:\$PATH
+source \$ZSH_CONFIG_DIR/zshrc.sh
+EOF
 
-# source zshrc.sh in the .zshrc file
-echo "source $ZSH_CONFIG_DIR/zshrc.sh" >> $HOME/.zshrc
-
-## out message ##
 echo "Zsh config setup complete. Please restart your terminal."
-echo "To use a work config:"
-echo "List work configs: 'zc workconfig list'"
-echo "To operate on workconfig 'zc workconfig <workname> <create|activate|deactivate|list>'"
-
+echo ""
+echo "To use work configs:"
+echo "  zc workconfig list                 List work configs"
+echo "  zc workconfig create <name>        Create a new work config"
+echo "  zc workconfig activate <name>      Activate a work config"
+echo "  zc workconfig deactivate <name>    Deactivate a work config"
