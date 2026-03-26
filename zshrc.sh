@@ -4,7 +4,7 @@
 
 # Path to zsh config dir
 export ZSH_CONFIG_DIR=$ZSH_CONFIG_DIR || "$HOME/.zshconfig"
-export PATH=$ZSH_CONFIG_DIR/zc:$PATH
+export PATH=$ZSH_CONFIG_DIR:$PATH
 
 # top level zsh files
 find "$ZSH_CONFIG_DIR/default_configs" -maxdepth 1 -type f -name "*.sh" | while read -r file; do
@@ -26,6 +26,13 @@ fi
 
 # source ohmyzsh last
 source $ZSH_CONFIG_DIR/ohmyzsh.sh
+
+# link todo app if not installed
+if ! command -v todo &> /dev/null; then
+  if [ -d "$HOME/dev/todo" ]; then
+    (cd "$HOME/dev/todo" && npm link) &> /dev/null
+  fi
+fi
 
 # Amazon Q post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"

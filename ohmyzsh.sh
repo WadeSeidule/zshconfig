@@ -3,8 +3,8 @@
 
 # check if OMZ is installed
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    echo "Oh My Zsh is not installed. Installing now..."
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  echo "Oh My Zsh is not installed. Installing now..."
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
 # Path to your oh-my-zsh installation.
@@ -18,7 +18,7 @@ export ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 
 # defined in custom.zsh-theme and cp to $ZSH_CUSTOM/themes/custom.zsh-theme
 if [ ! -f "$ZSH_CUSTOM/themes/custom.zsh-theme" ]; then
-    cp custom.zsh-theme $ZSH_CUSTOM/themes/custom.zsh-theme
+  cp custom.zsh-theme $ZSH_CUSTOM/themes/custom.zsh-theme
 fi
 ZSH_THEME="custom"
 
@@ -86,28 +86,29 @@ ZSH_THEME="custom"
 ## CUSTOM PLUG IN INSTALLATION INFO ##
 # zsh-vi-mode:
 if [ ! -d "$ZSH_CUSTOM/plugins/zsh-vi-mode" ]; then
-    git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
+  git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
 fi
 
 # oh my zsh plugins
 plugins=(
-    git
-    aws
-    docker
-    golang
-    helm
-    kubectx
-    kubectl
-    kube-ps1
-    pip
-    poetry
-    python
-    redis-cli
-    yarn
-    1password
-    celery
-    # custom plugins
-    zsh-vi-mode
+  git
+  aws
+  docker
+  golang
+  helm
+  kubectx
+  kubectl
+  kube-ps1
+  pip
+  poetry
+  python
+  redis-cli
+  yarn
+  1password
+  celery
+  # custom plugins
+  zsh-vi-mode
 )
 
 source $OMZ/oh-my-zsh.sh
+

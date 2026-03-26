@@ -131,5 +131,22 @@ function new_venv() {
 }
 
 function venv_deactivate() {
-  if [  ]
+  venv_name=$1
+  if [ -n "$ACTIVE_PYENV" ]; then
+    pyenv deactivate
+    export ACTIVE_PYENV=""
+  else
+    deactivate $PYTHON_VENV_DIRECTORY/$venv_name
+  fi
+}
+
+
+function nvim-config() {
+  nvim ~/.config/nvim
+}
+
+
+function activate() {
+  # default activation of venv
+  source .venv/bin/activate
 }

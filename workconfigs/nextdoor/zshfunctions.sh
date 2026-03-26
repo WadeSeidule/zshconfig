@@ -16,3 +16,24 @@ function update_dotfiles_if_time() {
         echo "$current_time" > "$HOME/.dotfiles_last_updated"
     fi
 }
+
+
+function kube_login_stg() {
+    kube_login $STG_CTX
+}
+
+function kube_login_prod() {
+    kube_login $PROD_CTX
+}
+
+function kube_login_local() {
+    kube_login
+}
+
+
+function aws_login() {
+    aws_eng_login
+    aws_data_login
+}
+
+fpath=(~/.zfunc $fpath); autoload -Uz compinit && compinit
