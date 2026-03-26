@@ -18,7 +18,7 @@ export ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 
 # defined in custom.zsh-theme and cp to $ZSH_CUSTOM/themes/custom.zsh-theme
 if [ ! -f "$ZSH_CUSTOM/themes/custom.zsh-theme" ]; then
-  cp custom.zsh-theme $ZSH_CUSTOM/themes/custom.zsh-theme
+  cp "$ZSH_CONFIG_DIR/custom.zsh-theme" "$ZSH_CUSTOM/themes/custom.zsh-theme"
 fi
 ZSH_THEME="custom"
 
