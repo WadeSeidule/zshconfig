@@ -20,9 +20,15 @@ export ACTIVE_PYENV=""
 export DEFAULT_VENV=1
 
 export PYTHONPATH=.
-# pyenv config
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
+# pyenv — lazy loaded, initializes on first call to pyenv/python3/pip3
+if command -v pyenv &>/dev/null; then
+  _zc_load_pyenv() {
+    unset -f pyenv python3 pip3 2>/dev/null
+    eval "$(command pyenv init -)"
+  }
+  pyenv()   { _zc_load_pyenv; pyenv "$@" }
+  python3() { _zc_load_pyenv; python3 "$@" }
+  pip3()    { _zc_load_pyenv; pip3 "$@" }
 fi
 
 # Mysql
@@ -32,10 +38,19 @@ export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 export C_INCLUDE_PATH=/opt/homebrew/Cellar/librdkafka/2.5.0/include/
 export LIBRARY_PATH=/opt/homebrew/Cellar/librdkafka/2.5.0/lib
 
-# NVM
+# NVM — lazy loaded, initializes on first call to nvm/node/npm/npx
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+if [ -d "$NVM_DIR" ]; then
+  _zc_load_nvm() {
+    unset -f nvm node npm npx 2>/dev/null
+    [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
+  }
+  nvm()  { _zc_load_nvm; nvm "$@" }
+  node() { _zc_load_nvm; node "$@" }
+  npm()  { _zc_load_nvm; npm "$@" }
+  npx()  { _zc_load_nvm; npx "$@" }
+fi
 
 # Ruby
 export PATH=/opt/homebrew/Cellar/ruby/3.3.1/bin/:$PATH

@@ -147,3 +147,41 @@ Displays all currently active work configurations and all available configs.
 zc workconfig help
 ```
 Shows usage instructions.
+
+---
+
+#### `zc doctor`
+
+Validates your zsh config setup and checks for expected tools. Useful on a fresh machine to see what's missing.
+
+```bash
+zc doctor
+```
+
+Checks:
+- Framework files and directories
+- Oh-My-Zsh and custom plugins
+- Core tools (git, nvim, curl)
+- Python toolchain (python3, uv, pyenv, poetry)
+- Node toolchain (node, npm, nvm, yarn)
+- Kubernetes & cloud tools (kubectl, helm, aws, docker)
+- Other tools (fzf, fd, autojump)
+- Active work config validity
+
+---
+
+#### `zc profile`
+
+Profiles your shell startup time with a per-file breakdown to identify bottlenecks.
+
+```bash
+zc profile
+```
+
+Reports total interactive shell startup time (best of 3 runs) and times each sourced config file, sorted slowest first.
+
+---
+
+### Lazy Loading
+
+`nvm` and `pyenv` are lazy-loaded by default — they only initialize on first use of their commands (e.g., `node`, `npm`, `pyenv`, `python3`). This can save 200-400ms of shell startup time. The lazy loading is transparent: the first invocation triggers initialization, then the command runs normally.
