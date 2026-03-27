@@ -1,0 +1,41 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[alias]
+	st = status
+	ac = commit -am
+	filehistory = log -p --
+	pushsafe = ! git pull --ff-only && git push
+	ch = checkout
+[pull]
+	ff = only
+[init]
+	defaultBranch = main
+[rerere]
+	enabled = true
+[commit]
+	verbose = true
+[merge]
+	tool = kdiff3
+[user]
+	name = "Wade Seidule "
+	email = 41121292+WadeSeidule@users.noreply.github.com
+[push]
+	autoSetupRemote = true
+[core]
+	fsmonitor = true
+	untrackedcache = true
+	pager = diff-so-fancy | less --tabs=4 -RF
+[fetch]
+	prune = true
+[maintenance "incremental"]
+	schedule = hourly
+[interactive]
+	diffFilter = diff-so-fancy --patch
+[remote "origin"]
+	tagOpt = --no-tags
+[include]
+	path = /Users/wadeseidule/src/dotfiles/git/gitconfig-core.conf
+	path = /Users/wadeseidule/src/dotfiles/git/gitconfig-github-urls.conf
