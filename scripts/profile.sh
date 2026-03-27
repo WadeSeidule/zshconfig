@@ -98,7 +98,7 @@ printf '\n  %9.0fms  TOTAL (sourcing only)\n' $_pf_total_ms
 # Tip if slow
 if (( _pf_total_ms > 800 )); then
     printf '\n  Tip: ohmyzsh.sh is usually the biggest cost.\n'
-    printf '  Consider enabling lazy loading for nvm/pyenv in zshexports.sh.\n'
+    printf '  Consider enabling lazy loading for nvm in zshexports.sh.\n'
 fi
 PROFILERC
 

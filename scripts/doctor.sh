@@ -132,15 +132,14 @@ echo "${BOLD}Core tools${RESET}"
 check_cmd "git" ""
 check_cmd "nvim" "brew install neovim"
 check_cmd "curl" ""
+check_cmd "uv" "brew install uv"
+check_cmd "diff-so-fancy" "brew install diff-so-fancy"
 echo ""
 
 # --- Python ---
 echo "${BOLD}Python${RESET}"
-check_cmd "python3" ""
-check_cmd_optional "uv" "brew install uv"
+check_cmd "python3" "uv python install"
 check_cmd_optional "uvx" "comes with uv"
-check_cmd_optional "pyenv" "brew install pyenv"
-check_cmd_optional "poetry" "pipx install poetry"
 check_cmd_optional "pipx" "brew install pipx"
 echo ""
 

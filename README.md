@@ -161,8 +161,8 @@ zc doctor
 Checks:
 - Framework files and directories
 - Oh-My-Zsh and custom plugins
-- Core tools (git, nvim, curl)
-- Python toolchain (python3, uv, pyenv, poetry)
+- Core tools (git, nvim, curl, uv)
+- Python toolchain (python3, pipx)
 - Node toolchain (node, npm, nvm, yarn)
 - Kubernetes & cloud tools (kubectl, helm, aws, docker)
 - Other tools (fzf, fd, autojump)
@@ -184,4 +184,4 @@ Reports total interactive shell startup time (best of 3 runs) and times each sou
 
 ### Lazy Loading
 
-`nvm` and `pyenv` are lazy-loaded by default — they only initialize on first use of their commands (e.g., `node`, `npm`, `pyenv`, `python3`). This can save 200-400ms of shell startup time. The lazy loading is transparent: the first invocation triggers initialization, then the command runs normally.
+`nvm` is lazy-loaded by default — it only initializes on first use of its commands (e.g., `node`, `npm`, `npx`). This can save 200-400ms of shell startup time. The lazy loading is transparent: the first invocation triggers initialization, then the command runs normally.

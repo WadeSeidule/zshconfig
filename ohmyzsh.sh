@@ -100,7 +100,6 @@ plugins=(
   kubectl
   kube-ps1
   pip
-  poetry
   python
   redis-cli
   yarn

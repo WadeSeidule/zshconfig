@@ -13,23 +13,10 @@ export PYTHON_VENV_DIRECTORY="$HOME/dev/.venvs"
 mkdir -p $PYTHON_VENV_DIRECTORY
 
 # Exports used by workon function in zshfunctions.sh
-# use pyenv by default
-export DEFAULT_PYENV=0
-export ACTIVE_PYENV=""
 # use venvs in $PYTHON_VENV_DIRECTORY by default
 export DEFAULT_VENV=1
 
 export PYTHONPATH=.
-# pyenv — lazy loaded, initializes on first call to pyenv/python3/pip3
-if command -v pyenv &>/dev/null; then
-  _zc_load_pyenv() {
-    unset -f pyenv python3 pip3 2>/dev/null
-    eval "$(command pyenv init -)"
-  }
-  pyenv()   { _zc_load_pyenv; pyenv "$@" }
-  python3() { _zc_load_pyenv; python3 "$@" }
-  pip3()    { _zc_load_pyenv; pip3 "$@" }
-fi
 
 # Mysql
 export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
