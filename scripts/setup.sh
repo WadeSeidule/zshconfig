@@ -29,6 +29,7 @@ export PATH=\$ZSH_CONFIG_DIR:\$PATH
 source \$ZSH_CONFIG_DIR/zshrc.sh
 EOF
     echo "Zsh config appended to existing ~/.zshrc. Please restart your terminal."
+    echo "Warning: conflicting configurations are possible — the appended stanza runs after your existing ~/.zshrc, so earlier PATH changes or plugin managers may shadow these additions."
 else
     # Default mode: back up any existing .zshrc and overwrite
     if [ -f "$HOME/.zshrc" ]; then
