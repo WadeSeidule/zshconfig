@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+set -e
+
 if [ -z "$ZSH_CONFIG_DIR" ]; then
     # Infer from script location
     ZSH_CONFIG_DIR="$(cd "$(dirname "$0")/.." && pwd)"
@@ -14,8 +16,12 @@ fi
 
 # Check if already configured (protects both overwrite and append modes)
 if [ -f "$HOME/.zshrc" ] && grep -qF "source $ZSH_CONFIG_DIR/zshrc.sh" "$HOME/.zshrc"; then
-    echo "Zsh config is already set up (found source line in ~/.zshrc)."
-    echo "To force reinstall, remove ~/.zshrc and run again."
+    if [ "$APPEND_MODE" -eq 1 ]; then
+        echo "Source line already present in ~/.zshrc — nothing to append."
+    else
+        echo "Zsh config is already set up (found source line in ~/.zshrc)."
+        echo "To force reinstall, remove ~/.zshrc and run again."
+    fi
     exit 0
 fi
 
