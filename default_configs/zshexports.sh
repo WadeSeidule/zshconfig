@@ -1,5 +1,17 @@
 # /bin/zsh
 
+# Homebrew — auto-detect prefix on macOS (Apple Silicon + Intel) and Linux.
+# Skips if brew is already on PATH so this is safe to re-source.
+if ! command -v brew &>/dev/null; then
+  for _brew in /home/linuxbrew/.linuxbrew/bin/brew /opt/homebrew/bin/brew /usr/local/bin/brew; do
+    if [ -x "$_brew" ]; then
+      eval "$("$_brew" shellenv)"
+      break
+    fi
+  done
+  unset _brew
+fi
+
 # KUBE PS1
 KUBE_PS1_SYMBOL_ENABLE=false
 KUBE_PS1_CTX_COLOR=90

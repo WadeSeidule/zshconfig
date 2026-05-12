@@ -129,6 +129,7 @@ echo ""
 
 # --- Core tools ---
 echo "${BOLD}Core tools${RESET}"
+check_cmd "brew" "run: zc fix"
 check_cmd "git" ""
 check_cmd "nvim" "brew install neovim"
 check_cmd "curl" ""

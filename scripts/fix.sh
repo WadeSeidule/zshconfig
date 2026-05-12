@@ -76,12 +76,46 @@ mark_skip() {
     ((skipped++))
 }
 
-require_brew() {
-    if ! command -v brew &>/dev/null; then
-        echo "${FAIL}  Homebrew is required but not installed."
-        echo "  ${DIM}Install: /bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"${RESET}"
-        exit 1
+load_brew_shellenv() {
+    for candidate in /home/linuxbrew/.linuxbrew/bin/brew /opt/homebrew/bin/brew /usr/local/bin/brew; do
+        if [ -x "$candidate" ]; then
+            eval "$("$candidate" shellenv)"
+            return 0
+        fi
+    done
+    return 1
+}
+
+install_brew() {
+    echo ""
+    echo "  ${BOLD}Installing Homebrew${RESET} ${DIM}(interactive — may prompt for sudo password)${RESET}"
+    if $dry_run; then
+        echo "  $SKIP  $(printf '%-14s' "brew") ${DIM}would install Homebrew${RESET}"
+        ((skipped++))
+        return 1
     fi
+    if /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; then
+        load_brew_shellenv
+        if command -v brew &>/dev/null; then
+            echo "  $OK  $(printf '%-14s' "brew") ${DIM}installed — new shells load it via default_configs/zshexports.sh${RESET}"
+            ((fixed++))
+            return 0
+        fi
+    fi
+    echo "  $FAIL  $(printf '%-14s' "brew") ${DIM}install failed${RESET}"
+    ((failed++))
+    return 1
+}
+
+require_brew() {
+    if command -v brew &>/dev/null; then
+        return 0
+    fi
+    # brew may be installed but not on PATH (common on Linux after first install)
+    if load_brew_shellenv; then
+        return 0
+    fi
+    install_brew || exit 1
 }
 
 fix_cmd_brew() {
